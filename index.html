@@ -142,6 +142,27 @@ color:#333;
 }
 
 
+/* 🔹 PDF 生成專用樣式，縮小字體與間距 */
+.pdf-mode .a4page {
+  font-size:11px !important;
+}
+.pdf-mode .items-table td,
+.pdf-mode .items-table th {
+  padding:4px !important;
+}
+.pdf-mode .hdr .left,
+.pdf-mode .hdr .right {
+  padding:4px !important;
+}
+.pdf-mode .bottom .left-block,
+.pdf-mode .bottom .right-block {
+  padding:4px !important;
+}
+
+
+
+
+
 
 
 
@@ -574,15 +595,37 @@ async function generatePdfByPages(){
 
 /* ---------- events ---------- */
 document.getElementById('downloadPdf').addEventListener('click', async ()=>{
+   // 套用 PDF 專用 CSS
   // ensure preview is up-to-date
+  document.body.classList.add('pdf-mode');
+
+  // 重新生成預覽，確保縮小字體生效
   buildPreview();
+
+  // 等 0.3 秒後生成 PDF
   // wait a tick for rendering
-  setTimeout(()=>{ generatePdfByPages(); }, 300);
+  setTimeout(()=>{
+    generatePdfByPages();
+
+ // PDF 生成完成後移除 PDF CSS（選擇性）
+  document.body.classList.remove('pdf-mode');
+
+
+
+
+ }, 300);
 });
+
+
+
 document.getElementById('downloadPdf2').addEventListener('click', ()=>{
+
+
   // same action for other button
   document.getElementById('downloadPdf').click();
 });
+
+
 
 /* init */
 refreshTempTable();
