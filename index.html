@@ -14,41 +14,41 @@
   :root{ --a4-w-mm:210; --a4-h-mm:297; }
   body{ font-family:"標楷體","DFKai-SB","PMingLiU","Microsoft JhengHei","Noto Sans TC",sans-serif; margin:18px; background:#f2f2f2; color:#111; }
   .wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:14px; align-items:start; }
-  .panel{ background:#fff; padding:14px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+  .panel{ background:#fff; padding:14px; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
   h1{ font-size:16px; margin:0 0 8px 0; text-align:left; }
-  label{ display:block; font-size:8px; margin:6px 0 3px; }
-  input[type=text], input[type=date], input[type=number]{ width:100%; padding:8px; border:1px solid #ddd; border-radius:6px; box-sizing:border-box; font-size:14px; }
-  .row{ display:flex; gap:8px; margin-bottom:8px; }
+  label{ display:block; font-size:12px; margin:6px 0 3px; }
+  input[type=text], input[type=date], input[type=number]{ width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; box-sizing:border-box; font-size:14px; }
+  .row{ display:flex; gap:12px; margin-bottom:12px; }
   .col{ flex:1; min-width:140px; }
-  button{ background:#222; color:#fff; border:none; padding:8px 8px; border-radius:6px; cursor:pointer; }
+  button{ background:#222; color:#fff; border:none; padding:12px 12px; border-radius:6px; cursor:pointer; }
   button.secondary{ background:#888; }
 
-  table{ width:100%; border-collapse:collapse; font-size:8px; }
+  table{ width:100%; border-collapse:collapse; font-size:12px; }
   table th, table td{ border:1px solid #d0d0d0; padding:6px; vertical-align:middle; }
   table th{ background:#fafafa; font-weight:700; text-align:center; }
-  .muted{ color:#666; font-size:8px; }
+  .muted{ color:#666; font-size:12px; }
 
   /* Preview area (right column) */
   .preview-wrap{ position:relative; }
-  .preview-title{ font-weight:700; margin-bottom:8px; }
-  .preview{ background:#fff; border:1px solid #cfcfcf; padding:8px; border-radius:6px; }
-  .preview-note{ font-size:8px; color:#666; margin-top:8px; }
+  .preview-title{ font-weight:700; margin-bottom:12px; }
+  .preview{ background:#fff; border:1px solid #cfcfcf; padding:12px; border-radius:6px; }
+  .preview-note{ font-size:12px; color:#666; margin-top:12px; }
 
   /* A4 pages in preview - scale for screen */
-  .a4-container{ width:210mm; /* real A4 width */ margin:8px auto; background:#fff; box-shadow:0 4px 18px rgba(0,0,0,0.08); }
-  .a4page{ width:210mm; height:297mm; padding:12mm; box-sizing:border-box; font-size:8px; color:#111; background:#fff; }
+  .a4-container{ width:210mm; /* real A4 width */ margin:12px auto; background:#fff; box-shadow:0 4px 18px rgba(0,0,0,0.08); }
+  .a4page{ width:210mm; height:297mm; padding:12mm; box-sizing:border-box; font-size:12px; color:#111; background:#fff; }
   .page-grid{ display:flex; flex-direction:column; gap:8mm; height:100%; }
 
   /* single copy box (half page) */
-  .copy{ border:1px solid #999; padding:8px; box-sizing:border-box; min-height:calc(50% - 8px); display:flex; flex-direction:column; }
-  .hdr{ display:flex; justify-content:space-between; gap:8px; }
+  .copy{ border:1px solid #999; padding:12px; box-sizing:border-box; min-height:calc(50% - 12px); display:flex; flex-direction:column; }
+  .hdr{ display:flex; justify-content:space-between; gap:12px; }
   .hdr .left{ width:60%; border:1px solid #444; padding:6px; box-sizing:border-box; }
   .hdr .right{ width:38%; text-align:right; box-sizing:border-box; }
 
   .title-center{ text-align:center; font-weight:700; font-size:14px; margin-bottom:4px; }
-  .small{ font-size:8px; color:#333; }
+  .small{ font-size:12px; color:#333; }
 
-  .items-table{ width:100%; border-collapse:collapse; margin-top:8px; font-size:8px; }
+  .items-table{ width:100%; border-collapse:collapse; margin-top:12px; font-size:12px; }
   .items-table td.right, .items-table th.right {
   text-align: right;
 }
@@ -59,14 +59,14 @@
   .items-table tfoot td{ font-weight:700; text-align:right; vertical-align:bottom; padding-bottom:6px; }
 
   /* bottom area: left-block (buyer) & right-block (totals + signature) */
-  .bottom{ display:flex; justify-content:space-between; gap:8px; margin-top:8px; }
+  .bottom{ display:flex; justify-content:space-between; gap:12px; margin-top:12px; }
   .left-block{ width:60%; border:1px solid #444; padding:6px; box-sizing:border-box; }
   .right-block{ width:38%; text-align:right; box-sizing:border-box; }
 
-  .signature-box{ border:1px solid #444; width:160px; height:56px; display:inline-block; margin-top:8px; }
+  .signature-box{ border:1px solid #444; width:160px; height:56px; display:inline-block; margin-top:12px; }
 
   /* dashed separator (not necessary in PDF but kept) */
-  .dashed{ border-top:2px dashed #666; margin:8px 0; }
+  .dashed{ border-top:2px dashed #666; margin:12px 0; }
 
   /* right vertical label (直書) */
   .vertical-label{ 
@@ -76,7 +76,7 @@ top:30%;
 writing-mode: vertical-rl; /* 直書 */ 
 text-orientation:upright; 
 font-weight:700; 
-font-size:8px; 
+font-size:12px; 
 color:#333; 
 }
 
@@ -103,7 +103,7 @@ color:#333;
   height:297mm;
   padding:12mm;
   box-sizing:border-box;
-  font-size:8px;
+  font-size:12px;
   color:#111;
   background:#fff;
 }
@@ -151,14 +151,14 @@ color:#333;
 .pdf-mode .bottom div,
 .pdf-mode .title-center,
 .pdf-mode .vertical-label {
-  letter-spacing: 4px !important; /* PDF 也套用字間距 */
+  letter-spacing: 2px !important; /* PDF 也套用字間距 */
 }
 
 
 
 /* 🔹 全局字間距 */
 body, input, select, textarea, .preview, .a4page, .copy, .items-table td, .items-table th, .hdr div, .bottom div, .title-center, .vertical-label {
-  letter-spacing: 4px; /* 調整這個值即可增減字間距 */
+  letter-spacing: 2px; /* 調整這個值即可增減字間距 */
 }
 
 
@@ -195,9 +195,9 @@ body, input, select, textarea, .preview, .a4page, .copy, .items-table td, .items
       <div class="col"><label>備註</label><input id="nota_note" type="text" placeholder="（選填）"></div>
     </div>
 
-    <hr style="border:none;height:1px;background:#eee;margin:8px 0;">
+    <hr style="border:none;height:1px;background:#eee;margin:12px 0;">
 
-    <div style="font-weight:700; margin-bottom:6px;">新增發票明細</div>
+    <div style="font-weight:700; margin-bottom:12px;">新增發票明細</div>
 <div class="row">
   <div style="flex:1">
     <label>聯式</label>
@@ -248,7 +248,7 @@ body, input, select, textarea, .preview, .a4page, .copy, .items-table td, .items
 
 
 
-<div style="margin-top:8px;">
+<div style="margin-top:10px;">
   <table id="tempTable">
     <thead>
       <tr>
@@ -282,9 +282,9 @@ body, input, select, textarea, .preview, .a4page, .copy, .items-table td, .items
 </div>
 
 
-    <div style="display:flex; justify-content:space-between; gap:8px; margin-top:8px;">
+    <div style="display:flex; justify-content:space-between; gap:12px; margin-top:12px;">
       <button id="clearAll" class="secondary">清除所有暫存</button>
-      <div style="display:flex; gap:8px;">
+      <div style="display:flex; gap:12px;">
         <button id="updatePreview">更新預覽</button>
         <button id="downloadPdf" style="background:#0b79d0">下載 PDF（共四聯）</button>
       </div>
@@ -303,7 +303,7 @@ body, input, select, textarea, .preview, .a4page, .copy, .items-table td, .items
       </div>
     </div>
 
-    <div class="preview" id="previewArea" style="margin-top:8px;">
+    <div class="preview" id="previewArea" style="margin-top:12px;">
       <!-- A4 preview container (will be filled by JS) -->
       <div class="a4-container" id="previewPages">
         <!-- JS 會動態產生 .a4page 內容（2 pages） -->
@@ -454,10 +454,10 @@ const withtax = untaxed + tax;
 
 <div class="right" style="text-align:left;">
 
-  <div style="font-weight:500; font-size:8px">${escapeHtml(copyTitles[index])}</div>
+  <div style="font-weight:500; font-size:10px">${escapeHtml(copyTitles[index])}</div>
   <div>折讓日期：${nota_date || ''}</div>
-  <div style="margin-top:6px">折讓單編號：${nota_no || ''}</div>
-  <div style="margin-top:6px">備      註：${nota_note || ''}</div>
+  <div style="margin-top:10px">折讓單編號：${nota_no || ''}</div>
+  <div style="margin-top:10px">備      註：${nota_note || ''}</div>
 
 
           </div>
@@ -469,14 +469,14 @@ const withtax = untaxed + tax;
 <tr>
 <th>序號</th>
 <th>聯式</th>
-<th>發票日期</th>
-<th>發票號碼</th>
-<th>品名 / 說明</th>
+<th>發票<br>日期</th>
+<th>發票<br>號碼</th>
+<th>品名<br> / 說明</th>
 <th>數量</th>
 <th>單價（未稅）</th>
-<th>未稅金額</th>
-<th>營業稅額</th>
-<th>含稅金額</th>
+<th>未稅<br>金額</th>
+<th>營業<br>稅額</th>
+<th>含稅<br>金額</th>
 <th>備註</th>
 </tr>
           </thead>
@@ -493,13 +493,13 @@ const withtax = untaxed + tax;
           </tfoot>
         </table>
 
-<div style="text-align:left; margin-top:5px; font-size:6px;">
+<div style="text-align:left; margin-top:5px; font-size:10px;">
   本證明單所列銷貨退回退出或折讓，確屬事實，特此證明。
 </div>
 
 
-<div class="bottom" style="width:100%; margin-top:8px;">
-  <div class="left-block" style="width:50000%; border:2px solid red; padding:8px; box-sizing:border-box; height:100px;">
+<div class="bottom" style="width:100%; margin-top:12px;">
+  <div class="left-block" style="width:50000%; border:2px solid red; padding:12px; box-sizing:border-box; height:100px;">
 
             <div style="font-weight:700">原進貨人營業人(或原買受人)</div>
 
@@ -517,23 +517,23 @@ const withtax = untaxed + tax;
 
 
 
-            ${nota_note ? `<div style="margin-top:6px;">備註：${nota_note}</div>` : ''}
+            ${nota_note ? `<div style="margin-top:10px;">備註：${nota_note}</div>` : ''}
           </div>
 
           <div class="right-block"></div>
         </div>
 
 
-<div style="text-align:left; margin-top:5px; font-size:6px;">
+<div style="text-align:left; margin-top:5px; font-size:10px;">
 注意事項：
 </div>
-<div style="text-align:left; margin-top:5px; font-size:6px;">
+<div style="text-align:left; margin-top:5px; font-size:10px;">
 一、紅色框框為"必填欄位"。
 </div>
-<div style="text-align:left; margin-top:5px; font-size:6px;">
+<div style="text-align:left; margin-top:5px; font-size:10px;">
 二、原開立公司發票者，請加蓋公司發票章，寄回本公司即可。
 </div>
-<div style="text-align:left; margin-top:5px; font-size:6px;">
+<div style="text-align:left; margin-top:5px; font-size:10px;">
 三、原開立個人發票者，請填寫本單必填欄位，並加「個人私章」寄回本公司即可。
 </div>
 
@@ -581,7 +581,17 @@ async function generatePdfByPages(){
     // ensure element has white background for clean capture
     el.style.background = '#fff';
     // render to canvas
-    const canvas = await html2canvas(el, { scale:2, useCORS:true, backgroundColor: null });
+    const canvas = await html2canvas(el, { 
+    scale:2,               // 固定縮放比例
+    useCORS:true, 
+    dpi: 300,              // 強制輸出高解析
+    backgroundColor: null
+    windowWidth: 794,      // 固定畫面寬度（A4寬度 210mm ≈ 794px）
+    windowHeight: 1123,    // A4 高度
+    ignoreElements: el => el.classList.contains('no-print')
+ 
+
+ });
     const imgData = canvas.toDataURL('image/png');
     // calculate image size in mm to fit A4
     const pdfWidth = pdf.internal.pageSize.getWidth();
