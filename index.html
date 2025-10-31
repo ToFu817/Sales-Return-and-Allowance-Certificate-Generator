@@ -9,15 +9,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+
+
 <style>
   /* page & UI */
   :root{ --a4-w-mm:210; --a4-h-mm:297; }
-  body{ font-family:"標楷體","DFKai-SB","PMingLiU","Microsoft JhengHei","Noto Sans TC",sans-serif; margin:18px; background:#f2f2f2; color:#111; }
-  .wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:14px; align-items:start; }
-  .panel{ background:#fff; padding:14px; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
-  h1{ font-size:16px; margin:0 0 8px 0; text-align:left; }
+
+  /* 🔹 全局字體 */
+  body, .preview, input, select, textarea, .a4page, .copy, .items-table td, .items-table th, .hdr div, .bottom div, .title-center, .vertical-label {
+    font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+    font-size: 12px;       /* 預設大小，可依需要調整 */
+    letter-spacing: 2px;    /* 字間距 */
+    color: #111;
+  }
+
+  .wrap{ max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:12px; align-items:start; }
+  .panel{ background:#fff; padding:12px; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+  h1{ font-size:12px; margin:0 0 8px 0; text-align:left; }
   label{ display:block; font-size:12px; margin:6px 0 3px; }
-  input[type=text], input[type=date], input[type=number]{ width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; box-sizing:border-box; font-size:14px; }
+  input[type=text], input[type=date], input[type=number]{ width:100%; padding:12px; border:1px solid #ddd; border-radius:6px; box-sizing:border-box; font-size:12px; }
   .row{ display:flex; gap:12px; margin-bottom:12px; }
   .col{ flex:1; min-width:140px; }
   button{ background:#222; color:#fff; border:none; padding:12px 12px; border-radius:6px; cursor:pointer; }
@@ -28,147 +38,80 @@
   table th{ background:#fafafa; font-weight:700; text-align:center; }
   .muted{ color:#666; font-size:12px; }
 
-  /* Preview area (right column) */
+  /* Preview area */
   .preview-wrap{ position:relative; }
   .preview-title{ font-weight:700; margin-bottom:12px; }
   .preview{ background:#fff; border:1px solid #cfcfcf; padding:12px; border-radius:6px; }
-  .preview-note{ font-size:12px; color:#666; margin-top:12px; }
 
-  /* A4 pages in preview - scale for screen */
-  .a4-container{ width:210mm; /* real A4 width */ margin:12px auto; background:#fff; box-shadow:0 4px 18px rgba(0,0,0,0.08); }
-  .a4page{ width:210mm; height:297mm; padding:12mm; box-sizing:border-box; font-size:12px; color:#111; background:#fff; }
+  /* A4 pages in preview */
+  .a4-container{ width:210mm; margin:12px auto; background:#fff; box-shadow:0 4px 18px rgba(0,0,0,0.08); }
+  .a4page{ position:relative; width:210mm; height:297mm; padding:12mm; box-sizing:border-box; font-size:12px; background:#fff; }
   .page-grid{ display:flex; flex-direction:column; gap:8mm; height:100%; }
 
-  /* single copy box (half page) */
   .copy{ border:1px solid #999; padding:12px; box-sizing:border-box; min-height:calc(50% - 12px); display:flex; flex-direction:column; }
   .hdr{ display:flex; justify-content:space-between; gap:12px; }
   .hdr .left{ width:60%; border:1px solid #444; padding:6px; box-sizing:border-box; }
   .hdr .right{ width:38%; text-align:right; box-sizing:border-box; }
 
-  .title-center{ text-align:center; font-weight:700; font-size:14px; margin-bottom:4px; }
+  .title-center{ text-align:center; font-weight:700; font-size:12px; margin-bottom:4px; }
   .small{ font-size:12px; color:#333; }
 
   .items-table{ width:100%; border-collapse:collapse; margin-top:12px; font-size:12px; }
-  .items-table td.right, .items-table th.right {
-  text-align: right;
-}
-
+  .items-table td.right, .items-table th.right { text-align:right; }
   .items-table th{ background:#f6f6f6; text-align:center; }
-
-  /* 合計顯示在表格底部（tfoot）靠下 */
   .items-table tfoot td{ font-weight:700; text-align:right; vertical-align:bottom; padding-bottom:6px; }
 
-  /* bottom area: left-block (buyer) & right-block (totals + signature) */
   .bottom{ display:flex; justify-content:space-between; gap:12px; margin-top:12px; }
   .left-block{ width:60%; border:1px solid #444; padding:6px; box-sizing:border-box; }
   .right-block{ width:38%; text-align:right; box-sizing:border-box; }
-
   .signature-box{ border:1px solid #444; width:160px; height:56px; display:inline-block; margin-top:12px; }
 
-  /* dashed separator (not necessary in PDF but kept) */
   .dashed{ border-top:2px dashed #666; margin:12px 0; }
 
-  /* right vertical label (直書) */
   .vertical-label{ 
-position:absolute; 
-right:45mm;       /* 往框框旁邊靠一點 */ 
-top:30%; 
-writing-mode: vertical-rl; /* 直書 */ 
-text-orientation:upright; 
-font-weight:700; 
-font-size:12px; 
-color:#333; 
-}
-
-  /* responsive: make UI single column on narrow screens */
-  @media (max-width:1200px){
-    .wrap{ grid-template-columns:1fr; }
-    .a4-container{ transform:scale(0.7); transform-origin:top left; width:297mm; } /* scale preview for mobile */
+    position:absolute; 
+    right:45mm; top:30%; 
+    writing-mode: vertical-rl; 
+    text-orientation:upright; 
+    font-weight:700; 
+    font-size:12px; 
+    color:#333; 
   }
 
-/* 中間虛線，用來區分上下兩聯 */
-.page-divider {
-  position: absolute;
-  top: 25%;
-  left: 0;
-  width: 100%;
-  border-top: 2px dashed #666;
-  transform: translateY(-1px);
-  z-index: 10;
-}
-/* 確保 a4 page 有定位上下文，讓絕對定位的 page-divider 以每頁為基準 */
-.a4page {
-  position: relative; /* 新增：非常重要 */
-  width:210mm;
-  height:297mm;
-  padding:12mm;
-  box-sizing:border-box;
-  font-size:12px;
-  color:#111;
-  background:#fff;
-}
+  @media (max-width:1200px){
+    .wrap{ grid-template-columns:1fr; }
+    .a4-container{ transform:scale(0.7); transform-origin:top left; width:297mm; }
+  }
 
-/* 中間虛線，用來區分上下兩聯（以 .a4page 為參考） */
-.page-divider {
-  position: absolute;
-  top: 50%;          /* 以 .a4page 的高度為基準 */
-  left: 12mm;        /* 與頁邊距對齊（可調） */
-  right: 12mm;       /* 與頁邊距對齊（可調） */
-  border-top: 2px dashed #666;
-  transform: translateY(-1px);
-  z-index: 10;
-  pointer-events: none; /* 不會攔截滑鼠事件 */
-}
+  /* 中間虛線 */
+  .page-divider{ position:absolute; top:50%; left:12mm; right:12mm; border-top:2px dashed #666; transform:translateY(-1px); z-index:10; pointer-events:none; }
 
+  /* 原進貨人欄位 */
+  .row.buyer-name{ display:flex; align-items:center; margin-bottom:4px; }
+  .row.buyer-name .label{ flex:0 0 80mm; font-weight:bold; }
+  .row.buyer-name .value{ flex:1; border:2px solid red; padding:3px 6px; min-height:20px; border-radius:4px; }
 
-/* 🔶 原進貨人營業人(或原買受人) 欄位樣式 */
-.row.buyer-name {
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
-.row.buyer-name .label {
-  flex: 0 0 80mm; /* 左邊標籤寬度 */
-  font-weight: bold;
-}
-
-.row.buyer-name .value {
-  flex: 1; /* 自動撐滿右邊 */
-  border: 2px solid red; /* 改成紅框 */
-  padding: 3px 6px;
-  min-height: 20px;
-  border-radius: 4px; /* 可有可無，看你想不想圓角 */
-}
-
-
-/* 🔹 PDF 生成專用樣式，增加間距 */
-.pdf-mode .a4page,
-.pdf-mode .copy,
-.pdf-mode .items-table td,
-.pdf-mode .items-table th,
-.pdf-mode .hdr div,
-.pdf-mode .bottom div,
-.pdf-mode .title-center,
-.pdf-mode .vertical-label {
-  letter-spacing: 2px !important; /* PDF 也套用字間距 */
-}
-
-
-
-/* 🔹 全局字間距 */
-body, input, select, textarea, .preview, .a4page, .copy, .items-table td, .items-table th, .hdr div, .bottom div, .title-center, .vertical-label {
-  letter-spacing: 2px; /* 調整這個值即可增減字間距 */
-}
-
-
-
-
-
-
-
-
+  /* PDF 專用樣式 */
+  .pdf-mode .a4page,
+  .pdf-mode .copy,
+  .pdf-mode .items-table td,
+  .pdf-mode .items-table th,
+  .pdf-mode .hdr div,
+  .pdf-mode .bottom div,
+  .pdf-mode .title-center,
+  .pdf-mode .vertical-label {
+    font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif !important;
+    font-size: 11px !important;
+    letter-spacing: 2px !important;
+  }
 </style>
+
+
+
+
+
+
+
 </head>
 <body>
 
@@ -493,7 +436,7 @@ const withtax = untaxed + tax;
           </tfoot>
         </table>
 
-<div style="text-align:left; margin-top:5px; font-size:10px;">
+<div style="text-align:left; margin-top:5px; font-size:6px;">
   本證明單所列銷貨退回退出或折讓，確屬事實，特此證明。
 </div>
 
@@ -517,23 +460,23 @@ const withtax = untaxed + tax;
 
 
 
-            ${nota_note ? `<div style="margin-top:10px;">備註：${nota_note}</div>` : ''}
+            ${nota_note ? `<div style="margin-top:6px;">備註：${nota_note}</div>` : ''}
           </div>
 
           <div class="right-block"></div>
         </div>
 
 
-<div style="text-align:left; margin-top:5px; font-size:10px;">
+<div style="text-align:left; margin-top:5px; font-size:6px;">
 注意事項：
 </div>
-<div style="text-align:left; margin-top:5px; font-size:10px;">
+<div style="text-align:left; margin-top:5px; font-size:6px;">
 一、紅色框框為"必填欄位"。
 </div>
-<div style="text-align:left; margin-top:5px; font-size:10px;">
+<div style="text-align:left; margin-top:5px; font-size:6px;">
 二、原開立公司發票者，請加蓋公司發票章，寄回本公司即可。
 </div>
-<div style="text-align:left; margin-top:5px; font-size:10px;">
+<div style="text-align:left; margin-top:5px; font-size:6px;">
 三、原開立個人發票者，請填寫本單必填欄位，並加「個人私章」寄回本公司即可。
 </div>
 
@@ -581,17 +524,16 @@ async function generatePdfByPages(){
     // ensure element has white background for clean capture
     el.style.background = '#fff';
     // render to canvas
-    const canvas = await html2canvas(el, { 
-    scale:2,               // 固定縮放比例
-    useCORS:true, 
-    dpi: 300,              // 強制輸出高解析
-    backgroundColor: null
-    windowWidth: 794,      // 固定畫面寬度（A4寬度 210mm ≈ 794px）
-    windowHeight: 1123,    // A4 高度
-    ignoreElements: el => el.classList.contains('no-print')
- 
 
- });
+
+    const canvas = await html2canvas(el, { 
+scale:2, 
+useCORS:true, 
+backgroundColor: null 
+});
+
+
+
     const imgData = canvas.toDataURL('image/png');
     // calculate image size in mm to fit A4
     const pdfWidth = pdf.internal.pageSize.getWidth();
